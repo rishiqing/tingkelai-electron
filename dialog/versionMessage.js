@@ -6,18 +6,16 @@ window.onload = function () {
   let mac;
 
   /** 版本信息显示相关 */
-  ;(function() {
-    const os = require('os');
-    const package = require('../package.json');
-    const networkInterfaces = os.networkInterfaces();
-    const list = networkInterfaces.WLAN;
-    mac = list[0].mac.toLocaleUpperCase();
- 
-    document.querySelector('.client__version') = package.version;
-    document.querySelector('.chrome__version') = process.versions.chrome;
-    document.querySelector('.mac') = mac;
-  })()
+  const os = require('os');
+  const package = require('../package.json');
+  const networkInterfaces = os.networkInterfaces();
+  const list = networkInterfaces.WLAN;
+  mac = list[0].mac.toLocaleUpperCase();
 
+  document.querySelector('.client__version').innerText = package.version;
+  document.querySelector('.chrome__version').innerText = process.versions.chrome;
+  document.querySelector('.mac').innerText = mac;
+  
   /** 关闭弹出框 */
   function close() {
     ipcRenderer.send('close');
