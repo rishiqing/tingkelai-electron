@@ -11,7 +11,7 @@ matrix:
 
 env:
   global:
-    - GH_TOKEN=$GH_TOKEN
+    # - GH_TOKEN=$GH_TOKEN 使用 阿里云上传，就不需要使用GH_TOKEN
     - ELECTRON_CACHE=$HOME/.cache/electron
     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
@@ -26,7 +26,8 @@ install:
 
 script:
   # - echo GH_TOKEN
-  - npm run deploy
+  # - npm run deploy
+  - ./travis.sh
 
 branches:
   only:
