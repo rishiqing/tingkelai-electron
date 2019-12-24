@@ -52,7 +52,7 @@ function createWindow () {
       nodeIntegration: true // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
     }, 
   })
-  child.loadFile(path.join(__dirname, '/dialog/versionMessage.html'))
+  child.loadFile('./dialog/versionMessage.html')
 }
 
 // Electron 会在初始化后并准备
@@ -88,7 +88,6 @@ app.on('activate', () => {
 })
 
 ipcMain.on('close', () => {
-  console.log(321)
   child.hide()
 })
 
