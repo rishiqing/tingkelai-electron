@@ -1,11 +1,13 @@
 
-const { app, BrowserWindow, globalShortcut, Menu, dialog, Notification } = require('electron')
+const { app, BrowserWindow, globalShortcut, Menu, ipcMain, dialog, Notification, BrowserView } = require('electron')
 const { autoUpdater } = require("electron-updater")
 const path = require('path')
+var package = require("./package.json")
 
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
 let win
+let child
 
 function createWindow () {
   // 创建浏览器窗口。
@@ -20,11 +22,12 @@ function createWindow () {
     },
   })
   // new BuildMenu(win)
-  Menu.setApplicationMenu(null)
+  Menu.setApplicationMenu(setApplicationMenuTemplate())
 
   // 加载index.html文件
-  // win.loadURL('https://www.tingkelai.com/tingkelai/')
-  win.loadURL('https://test.tingkelai.com/tingkelai/login')
+  win.loadURL('https://www.tingkelai.com/tingkelai/')
+  // win.loadURL('https://www.baidu.com')
+  // win.loadURL('https://test.tingkelai.com/tingkelai/login')
   // win.loadURL('http://127.0.0.1:90/tingkelai/login')
 
   // 当 window 被关闭，这个事件会被触发。
@@ -34,7 +37,22 @@ function createWindow () {
     // 与此同时，你应该删除相应的元素。
     win = null
   })
-
+  
+  child = new BrowserWindow({ 
+    parent: win, 
+    modal: true, 
+    show: false, 
+    frame: false, 
+    width: 620,
+    height: 360,
+    minWidth: 620,
+    minHeight: 330,
+    resizable: false,
+    webPreferences: {
+      nodeIntegration: true // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
+    }, 
+  })
+  child.loadFile(path.join(__dirname, '/dialog/versionMessage.html'))
 }
 
 // Electron 会在初始化后并准备
@@ -42,11 +60,11 @@ function createWindow () {
 // 部分 API 在 ready 事件触发后才能使用。
 app.on('ready', () => {
   createWindow()
-  // registerShortcut()
-  autoUpdata()
+  registerShortcut()
+  // autoUpdata()
   setContextmenu(win.webContents)
   isDomReady(win.webContents)
-  setTheLock()
+  // setTheLock()
 })
 
 // 当全部窗口关闭时退出。
@@ -69,6 +87,11 @@ app.on('activate', () => {
   }
 })
 
+ipcMain.on('close', () => {
+  console.log(321)
+  child.hide()
+})
+
 /** 当运行第二个实例时 */
 function setTheLock() {
   const gotTheLock = app.requestSingleInstanceLock() // 此方法的返回值表示你的应用程序实例是否成功取得了锁。 return Boolean
@@ -89,6 +112,7 @@ function setTheLock() {
 function behindInstanceJavaScript(contents) {
   contents.executeJavaScript(`
     // console.log(document.querySelector('#app'))
+    // console.log(process)
     const os = require('os')
     const networkInterfaces = os.networkInterfaces();
     const list = networkInterfaces.WLAN
@@ -111,6 +135,19 @@ function registerShortcut() {
     })
   }
 
+}
+
+/** 设置菜单栏 */
+function setApplicationMenuTemplate() {
+  const template = [
+    {
+      label: '关于',
+      click: () => {
+        aboutDialog()
+      }
+    },
+  ]
+  return Menu.buildFromTemplate(template)
 }
 
 /**设置右击菜单栏 */
@@ -212,4 +249,9 @@ function autoUpdata() {
   //     }
   //   })
   // })
+}
+
+/** 显示关于dialog */
+function aboutDialog() {
+  child.show()
 }

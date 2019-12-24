@@ -14,19 +14,26 @@
     "serve": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "release": "electron-builder"
+    "release": "electron-builder",
+    "build-mac-beta": "cross-env CHANNEL=beta electron-builder",
+    "build-mac-release": "cross-env CHANNEL=release electron-builder",
+    "build-ia32-beta": "cross-env CHANNEL=beta electron-builder --ia32",
+    "build-ia32-release": "cross-env CHANNEL=release electron-builder --ia32",
+    "build-x64-beta": "cross-env CHANNEL=beta electron-builder --x64",
+    "build-x64-release": "cross-env CHANNEL=release electron-builder --x64",
+    "deploy": "rishiqing-deploy --config='.rishiqing-deploy.yml'"
   },
   "build": {
     "productName": "听客来",
     "appId": "tkl",
-    "copyright": "xxxx",
+    "copyright": "Copyright @ 2019 ${author}",
     "mac": {
       "category": "public.app-category.productivity",
       "icon": "assets/tkl.ico",
       "type": "distribution"
     },
     "dmg": {
-      "artifactName": "rishiqing-mac-${productName}-${version}.${ext}",
+      "artifactName": "听客来-mac-${version}.${ext}",
       "title": "听客来 ${version}",
       "contents": [
         {
@@ -47,7 +54,12 @@
           "target": "nsis"
         }
       ],
-      "icon": "assets/tkl.ico"
+      "icon": "assets/tkl.ico",
+      "publish": {
+        "provider": "generic",
+        "url": "https://download.timetask.cn/pc-autoupdate/win/win-ia32/${env.CHANNEL}",
+        "channel": "${env.CHANNEL}"
+      }
     },
     "nsis": {
       "installerIcon": "assets/tkl.ico",
@@ -75,8 +87,10 @@
   },
   "homepage": "https://github.com/rishiqing/tingkelai-electron#readme",
   "devDependencies": {
+    "cross-env": "^6.0.3",
     "electron": "^7.1.6",
-    "electron-builder": "^21.2.0"
+    "electron-builder": "^21.2.0",
+    "rishiqing-deploy": "^2.0.9"
   },
   "dependencies": {
     "electron-updater": "^4.2.0"

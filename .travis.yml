@@ -25,9 +25,11 @@ install:
   - npm i
 
 script:
-  - echo GH_TOKEN
-  - npm run release
+  # - echo GH_TOKEN
+  - npm run deploy
 
 branches:
   only:
-    - master
+    - /^master-deploy-.*$/ # 正式版的发布
+    - /^check-deploy-.*$/ # 用于审核的tag
+    - /^beta-deploy-.*$/ # 本地测试
