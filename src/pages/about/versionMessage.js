@@ -7,7 +7,7 @@ window.onload = function () {
 
   /** 版本信息显示相关 */
   const os = require('os');
-  const package = require('../package.json');
+  const package = require('../../../package.json');
   const networkInterfaces = os.networkInterfaces();
   const list = networkInterfaces.WLAN;
   mac = list[0].mac.toLocaleUpperCase();

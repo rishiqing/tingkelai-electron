@@ -2,7 +2,6 @@ const builder = require('electron-builder');
 const pkg = require('./package.json');
 
 const output = process.platform === 'darwin' ? `package-${process.env.CHANNEL}` : `package-${process.env.ARCH}-${process.env.CHANNEL}`;
-console.log(output)
 
 builder.build({
   config: {
@@ -11,8 +10,16 @@ builder.build({
     electronVersion: pkg.electronVersion,
     directories: {
       output: output,
-      // app: 'dir'
+      // app: 'src',  // electron 默认打包的文件夹入口
     },
+    files: [
+      'src/**',
+      'node_modules/**/*',
+      'package.json',
+      'electron-builder.js',
+      'main.js',
+      // 'travis.sh',
+    ],
     publish: {
       provider: 'generic',
       url: 'https://download.timetask.cn/pc-autoupdate/${os}/${env.CHANNEL}',
@@ -46,7 +53,7 @@ builder.build({
           arch: [process.env.ARCH]
         }
       ],
-      icon: 'assets/tkl.ico',
+      icon: 'src/assets/tkl.ico',
       publish: {
         provider: 'generic',
         url: 'https://download.timetask.cn/pc-autoupdate/${os}/${env.ARCH}/${env.CHANNEL}',
@@ -58,9 +65,9 @@ builder.build({
       shortcutName: '听客来',
       uninstallDisplayName: '听客来 ${version}',
       guid: 'BE407C3D-E86D-7273-36F9-69C6E8F9F216',
-      installerIcon: "assets/tkl.ico",
-      uninstallerIcon: "assets/tkl.ico",
-      installerHeaderIcon: "assets/tkl.ico",
+      installerIcon: "src/assets/tkl.ico",
+      uninstallerIcon: "src/assets/tkl.ico",
+      installerHeaderIcon: "src/assets/tkl.ico",
       createDesktopShortcut: true,
       createStartMenuShortcut: true,
       allowToChangeInstallationDirectory: true,
