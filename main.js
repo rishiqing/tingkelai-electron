@@ -16,7 +16,7 @@ function createWindow () {
     height: 1000,
     minWidth: 1300,
     minHeight: 800,
-    icon: 'assets/favicon.icns',
+    icon: 'src/assets/favicon.icns',
     webPreferences: {
       nodeIntegration: true // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
     },
@@ -52,7 +52,7 @@ function createWindow () {
       nodeIntegration: true // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
     }, 
   })
-  child.loadFile('./dialog/versionMessage.html')
+  child.loadFile('./src/pages/about/versionMessage.html')
 }
 
 // Electron 会在初始化后并准备
