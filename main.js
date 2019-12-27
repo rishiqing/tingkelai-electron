@@ -16,7 +16,7 @@ function createWindow () {
     height: 1000,
     minWidth: 1300,
     minHeight: 800,
-    icon: 'src/assets/favicon.icns',
+    icon: 'assets/favicon.icns',
     webPreferences: {
       nodeIntegration: true // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
     },
@@ -52,7 +52,7 @@ function createWindow () {
       nodeIntegration: true // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
     }, 
   })
-  child.loadFile('./src/pages/about/versionMessage.html')
+  child.loadFile('./dialog/versionMessage.html')
 }
 
 // Electron 会在初始化后并准备
@@ -61,10 +61,10 @@ function createWindow () {
 app.on('ready', () => {
   createWindow()
   registerShortcut()
-  autoUpdata()
+  // autoUpdata()
   setContextmenu(win.webContents)
   isDomReady(win.webContents)
-  setTheLock()
+  // setTheLock()
 })
 
 // 当全部窗口关闭时退出。
@@ -190,15 +190,17 @@ function isDomReady(contents) {
 /** 显示更新弹框 */
 function autoUpdata() {
   // autoUpdater.getFeedURL('http://127.0.0.1:8080')
+  // autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml')
   
+  // test
   autoUpdater.checkForUpdates()
-  autoUpdater.on('update-downloaded', function (info) {
-    const notify = new Notification({
-      title: `日事清V${info.version} 已准备就绪！`,
-      body: `请退出当前应用，以便完成更新！`
-    });
-    notify.show();
-  });
+  // autoUpdater.on('update-downloaded', function (info) {
+  //   const notify = new Notification({
+  //     title: `日事清V${info.version} 已准备就绪！`,
+  //     body: `请退出当前应用，以便完成更新！`
+  //   });
+  //   notify.show();
+  // });
   // autoUpdater.on('error', function (error) {
   //   console.log(error, '-')
   //   const notify = new Notification({
@@ -208,13 +210,13 @@ function autoUpdata() {
   //   notify.show();
   // });
 
-  autoUpdater.on('update-available', () => {
-    const notify = new Notification({
-      title: `有更新`,
-      body: `有更新`
-    });
-    notify.show();
-  })
+  // autoUpdater.on('update-available', () => {
+  //   const notify = new Notification({
+  //     title: `有更新`,
+  //     body: `有更新`
+  //   });
+  //   notify.show();
+  // })
   // autoUpdater.on('update-not-available', () => {
   //   const notify = new Notification({
   //     title: `没有更新`,
