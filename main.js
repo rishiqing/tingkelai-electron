@@ -61,10 +61,10 @@ function createWindow () {
 app.on('ready', () => {
   createWindow()
   registerShortcut()
-  // autoUpdata()
+  autoUpdata()
   setContextmenu(win.webContents)
   isDomReady(win.webContents)
-  // setTheLock()
+  setTheLock()
 })
 
 // 当全部窗口关闭时退出。
@@ -190,7 +190,6 @@ function isDomReady(contents) {
 /** 显示更新弹框 */
 function autoUpdata() {
   // autoUpdater.getFeedURL('http://127.0.0.1:8080')
-  // autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml')
   
   autoUpdater.checkForUpdates()
   autoUpdater.on('update-downloaded', function (info) {
