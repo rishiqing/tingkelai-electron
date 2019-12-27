@@ -22,7 +22,7 @@ builder.build({
     ],
     publish: {
       provider: 'generic',
-      url: 'https://download.timetask.cn/pc-autoupdate/${os}/${env.CHANNEL}',
+      url: 'https://download.tingkelai.com/pc-autoupdate/${os}/${env.CHANNEL}',
       channel: '${env.CHANNEL}'
     },
     mac: {
@@ -56,7 +56,7 @@ builder.build({
       icon: 'src/assets/tkl.ico',
       publish: {
         provider: 'generic',
-        url: 'https://download.timetask.cn/pc-autoupdate/${os}/${env.ARCH}/${env.CHANNEL}',
+        url: 'https://download.tingkelai.com/pc-autoupdate/${os}/${env.ARCH}/${env.CHANNEL}',
         channel: '${env.CHANNEL}'
       }
     },

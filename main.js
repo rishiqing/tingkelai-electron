@@ -192,15 +192,14 @@ function autoUpdata() {
   // autoUpdater.getFeedURL('http://127.0.0.1:8080')
   // autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml')
   
-  // test
   autoUpdater.checkForUpdates()
-  // autoUpdater.on('update-downloaded', function (info) {
-  //   const notify = new Notification({
-  //     title: `日事清V${info.version} 已准备就绪！`,
-  //     body: `请退出当前应用，以便完成更新！`
-  //   });
-  //   notify.show();
-  // });
+  autoUpdater.on('update-downloaded', function (info) {
+    const notify = new Notification({
+      title: `日事清V${info.version} 已准备就绪！`,
+      body: `请退出当前应用，以便完成更新！`
+    });
+    notify.show();
+  });
   // autoUpdater.on('error', function (error) {
   //   console.log(error, '-')
   //   const notify = new Notification({
@@ -210,13 +209,13 @@ function autoUpdata() {
   //   notify.show();
   // });
 
-  // autoUpdater.on('update-available', () => {
-  //   const notify = new Notification({
-  //     title: `有更新`,
-  //     body: `有更新`
-  //   });
-  //   notify.show();
-  // })
+  autoUpdater.on('update-available', () => {
+    const notify = new Notification({
+      title: `有更新`,
+      body: `有更新`
+    });
+    notify.show();
+  })
   // autoUpdater.on('update-not-available', () => {
   //   const notify = new Notification({
   //     title: `没有更新`,
