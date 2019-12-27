@@ -1,9 +1,9 @@
 matrix:
   include:
-    # - os: osx
-    #   osx_image: xcode10.2
-    #   language: node_js
-    #   node_js: "10"
+    - os: osx
+      osx_image: xcode10.2
+      language: node_js
+      node_js: "10"
 
     - os: windows
       language: node_js
@@ -11,7 +11,7 @@ matrix:
 
 env:
   global:
-    # - GH_TOKEN=$GH_TOKEN 使用 阿里云上传，就不需要使用GH_TOKEN
+    - GH_TOKEN=$GH_TOKEN
     - ELECTRON_CACHE=$HOME/.cache/electron
     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
 
@@ -26,8 +26,7 @@ install:
 
 script:
   # - echo GH_TOKEN
-  # - npm run deploy
-  - ./travis.sh
+  - npm run deploy
 
 branches:
   only:
