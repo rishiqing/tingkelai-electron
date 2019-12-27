@@ -1,10 +1,10 @@
 {
   "name": "tingkelai-electron",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "听客来PC客户端",
   "main": "main.js",
-  "author": "南京创世德意",
-  "CompanyName": "南京创世德意",
+  "author": "南京听客来信息技术有限公司",
+  "CompanyName": "南京听客来信息技术有限公司",
   "FileDescription": "听客来",
   "OriginalFilename": "听客来.exe",
   "ProductName": "听客来",
@@ -15,67 +15,23 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "release": "electron-builder",
-    "build-mac-beta": "cross-env CHANNEL=beta electron-builder",
-    "build-mac-release": "cross-env CHANNEL=release electron-builder",
-    "build-ia32-beta": "cross-env CHANNEL=beta electron-builder --ia32",
-    "build-ia32-release": "cross-env CHANNEL=release electron-builder --ia32",
-    "build-x64-beta": "cross-env CHANNEL=beta electron-builder --x64",
-    "build-x64-release": "cross-env CHANNEL=release electron-builder --x64",
+    "build-mac-beta": "cross-env CHANNEL=beta ARCH=x64 node electron-builder.js",
+    "build-mac-release": "cross-env CHANNEL=release ARCH=x64 node electron-builder.js",
+    "build-ia32-beta": "cross-env CHANNEL=beta ARCH=ia32 node electron-builder.js",
+    "build-ia32-release": "cross-env CHANNEL=release ARCH=ia32 node electron-builder.js",
+    "build-x64-beta": "cross-env CHANNEL=beta ARCH=x64 node electron-builder.js",
+    "build-x64-release": "cross-env CHANNEL=release ARCH=x64 node electron-builder.js",
+    "rdp-mac-beta": "rishiqing-deploy --env=mac-beta",
+    "rdp-mac-check": "rishiqing-deploy --env=mac-check",
+    "rdp-mac-release": "rishiqing-deploy --env=mac-release",
+    "rdp-ia32-beta": "rishiqing-deploy --env=ia32-beta",
+    "rdp-ia32-check": "rishiqing-deploy --env=ia32-check",
+    "rdp-ia32-release": "rishiqing-deploy --env=ia32-release",
+    "rdp-x64-beta": "rishiqing-deploy --env=x64-beta",
+    "rdp-x64-check": "rishiqing-deploy --env=x64-check",
+    "rdp-x64-release": "rishiqing-deploy --env=x64-release",
     "deploy": "rishiqing-deploy --config='.rishiqing-deploy.yml'"
   },
-  "build": {
-    "productName": "听客来",
-    "appId": "tkl",
-    "copyright": "Copyright @ 2019 ${author}",
-    "mac": {
-      "category": "public.app-category.productivity",
-      "icon": "assets/tkl.ico",
-      "type": "distribution"
-    },
-    "dmg": {
-      "artifactName": "听客来-mac-${version}.${ext}",
-      "title": "听客来 ${version}",
-      "contents": [
-        {
-          "x": 30,
-          "y": 190
-        },
-        {
-          "x": 150,
-          "y": 190,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
-    },
-    "win": {
-      "target": [
-        {
-          "target": "nsis"
-        }
-      ],
-      "icon": "assets/tkl.ico",
-      "publish": {
-        "provider": "generic",
-        "url": "https://download.timetask.cn/pc-autoupdate/win/win-ia32/${env.CHANNEL}",
-        "channel": "${env.CHANNEL}"
-      }
-    },
-    "nsis": {
-      "installerIcon": "assets/tkl.ico",
-      "uninstallerIcon": "assets/tkl.ico",
-      "installerHeaderIcon": "assets/tkl.ico",
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
-      "shortcutName": "听客来",
-      "allowToChangeInstallationDirectory": true,
-      "oneClick": false,
-      "perMachine": false
-    }
-  },
-  "publish": [
-    "github"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rishiqing/tingkelai-electron.git"
