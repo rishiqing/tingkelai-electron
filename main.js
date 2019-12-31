@@ -26,8 +26,8 @@ function createWindow () {
 
   // 加载index.html文件
   // win.loadURL('https://www.tingkelai.com/tingkelai/')
-  // win.loadURL('https://test.tingkelai.com/tingkelai/login')
-  win.loadURL('http://127.0.0.1:90/tingkelai/login')
+  win.loadURL('https://test.tingkelai.com/tingkelai/login')
+  // win.loadURL('http://127.0.0.1:90/tingkelai/login')
 
   // 当 window 被关闭，这个事件会被触发。
   win.on('closed', () => {
