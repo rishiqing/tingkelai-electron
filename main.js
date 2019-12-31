@@ -25,9 +25,8 @@ function createWindow () {
   Menu.setApplicationMenu(setApplicationMenuTemplate())
 
   // 加载index.html文件
-  win.loadURL('https://www.tingkelai.com/tingkelai/')
-  // win.loadURL('https://www.baidu.com')
-  // win.loadURL('https://test.tingkelai.com/tingkelai/login')
+  // win.loadURL('https://www.tingkelai.com/tingkelai/')
+  win.loadURL('https://test.tingkelai.com/tingkelai/login')
   // win.loadURL('http://127.0.0.1:90/tingkelai/login')
 
   // 当 window 被关闭，这个事件会被触发。
@@ -60,7 +59,7 @@ function createWindow () {
 // 部分 API 在 ready 事件触发后才能使用。
 app.on('ready', () => {
   createWindow()
-  registerShortcut()
+  // registerShortcut()
   autoUpdata()
   setContextmenu(win.webContents)
   isDomReady(win.webContents)
@@ -110,13 +109,11 @@ function setTheLock() {
 /** 在实例加载成功后，执行的脚本 */
 function behindInstanceJavaScript(contents) {
   contents.executeJavaScript(`
-    // console.log(document.querySelector('#app'))
-    // console.log(process)
     const os = require('os')
     const networkInterfaces = os.networkInterfaces();
     const list = networkInterfaces.WLAN
-    // console.log(list[0].mac)
     if (list && list.length > 0) window.mac = list[0].mac
+    window.isElectron = true
   `)
 }
 
@@ -189,62 +186,22 @@ function isDomReady(contents) {
 
 /** 显示更新弹框 */
 function autoUpdata() {
-  // autoUpdater.getFeedURL('http://127.0.0.1:8080')
-  
   autoUpdater.checkForUpdates()
-  autoUpdater.on('update-downloaded', function (info) {
-    const notify = new Notification({
-      title: `日事清V${info.version} 已准备就绪！`,
-      body: `请退出当前应用，以便完成更新！`
-    });
-    notify.show();
-  });
-  // autoUpdater.on('error', function (error) {
-  //   console.log(error, '-')
+  // autoUpdater.on('update-downloaded', function (info) {
   //   const notify = new Notification({
-  //     title: '日事清PC端自动更新出错了!!!',
-  //     body: error.message
+  //     title: `听客来V${info.version} 已准备就绪！`,
+  //     body: `请退出当前应用，以便完成更新！`
   //   });
   //   notify.show();
   // });
 
-  autoUpdater.on('update-available', () => {
-    const notify = new Notification({
-      title: `有更新`,
-      body: `有更新`
-    });
-    notify.show();
-  })
-  // autoUpdater.on('update-not-available', () => {
-  //   const notify = new Notification({
-  //     title: `没有更新`,
-  //     body: `没有更新`
-  //   });
-  //   notify.show();
-  // })
-  
-  // autoUpdater.on('download-progress', () => {
-  //   const notify = new Notification({
-  //     title: `更新中...`,
-  //     body: `更新中...`
-  //   });
-  //   notify.show();
-  // })
 
-  // autoUpdater.on('update-downloaded', () => {
-  //   dialog.showMessageBox(win, {
-  //     type: 'info',
-  //     title: '更新完成',
-  //     message: '恭喜更新完成！',
-  //     buttons: ['关闭', '确定'],
-  //   }).then((res) => {
-  //     console.log(res)
-  //     if (res.response === 1) {
-  //       autoUpdater.quitAndInstall()
-  //     } else {
-  //       app.quit()
-  //     }
-  //   })
+  // autoUpdater.on('update-available', () => {
+  //   const notify = new Notification({
+  //     title: `有更新`,
+  //     body: `有更新`
+  //   });
+  //   notify.show();
   // })
 }
 
