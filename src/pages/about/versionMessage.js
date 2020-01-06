@@ -14,7 +14,7 @@ window.onload = function () {
 
   document.querySelector('.client__version').innerText = package.version;
   document.querySelector('.chrome__version').innerText = process.versions.chrome;
-  document.querySelector('.mac').innerText = mac;
+  document.querySelector('.mac').innerText = mac.replace(/:/g, '-');
   
   /** 关闭弹出框 */
   function close() {
@@ -30,14 +30,13 @@ window.onload = function () {
     textArea.style.left = 0;
     textArea.style.width = '1px';
     textArea.style.height = '1px';
-    textArea.value = mac;
+    textArea.value = mac.replace(/:/g, '-');
     document.body.appendChild(textArea);
     textArea.select();
     document.execCommand('copy');
     document.body.removeChild(textArea);
 
     const notify = new Notification({
-      // title: `日事清V${info.version} 已准备就绪！`,
       body: `成功复制本机mac地址到剪贴板！`
     });
     notify.show();

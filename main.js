@@ -112,7 +112,8 @@ function behindInstanceJavaScript(contents) {
     const os = require('os')
     const networkInterfaces = os.networkInterfaces();
     const list = networkInterfaces.WLAN
-    if (list && list.length > 0) window.mac = list[0].mac
+    if (list && list.length > 0) window.mac = list[0].mac.replace(/:/g, '-')
+    // console.log(list[0].mac.replace(/:/g, '-'))
     window.isElectron = true
   `)
 }
