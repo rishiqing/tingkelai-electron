@@ -41,7 +41,7 @@ ul {
 }
 li {
   text-align: center;
-  width: 280px;
+  width: 296px;
   margin: 0 auto;
   margin-bottom: 44px;
 }
@@ -75,6 +75,6 @@ li .span__width {
 } 
 
 li span:nth-child(2) {
-  width: 140px;
+  width: 160px;
   text-align-last: left;
 }
