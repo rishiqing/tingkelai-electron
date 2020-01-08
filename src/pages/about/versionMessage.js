@@ -2,7 +2,7 @@ window.onload = function () {
   const { ipcRenderer } = require('electron');
   const { Notification } = require('electron').remote;
   document.querySelector('.close').addEventListener('click', close);
-  document.querySelector('.copy').addEventListener('click', copy);
+  document.querySelector('.copy__click').addEventListener('click', copy);
   let mac;
 
   /** 版本信息显示相关 */
@@ -21,9 +21,12 @@ window.onload = function () {
     ipcRenderer.send('close');
   }
 
+
   /** 复制按钮 */
   function copy() {
     var textArea = document.createElement("textarea");
+
+    window.clearTimeout(window.timer)
 
     textArea.style.position = 'fixed';
     textArea.style.top = '-999px';
@@ -36,9 +39,15 @@ window.onload = function () {
     document.execCommand('copy');
     document.body.removeChild(textArea);
 
-    const notify = new Notification({
-      body: `成功复制本机mac地址到剪贴板！`
-    });
-    notify.show();
+    // 提示复制成功，2s后关闭
+    document.querySelector('.copy__tips').style.opacity = 1;
+    window.timer =  window.setTimeout(() => {
+      document.querySelector('.copy__tips').style.opacity = 0;
+    }, 2000);
+
+    // const notify = new Notification({
+    //   body: `成功复制本机mac地址到剪贴板！`
+    // });
+    // notify.show();
   }
 }
