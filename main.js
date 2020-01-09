@@ -17,6 +17,7 @@ function createWindow () {
     minWidth: 1300,
     minHeight: 800,
     icon: 'src/assets/favicon.icns',
+    title: '听客来',
     webPreferences: {
       nodeIntegration: true // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
     },
@@ -52,7 +53,7 @@ function createWindow () {
     }, 
   })
   child.loadFile('./src/pages/about/versionMessage.html')
-  child.webContents.openDevTools()
+  // child.webContents.openDevTools() // 打开调试控制台
 }
 
 // Electron 会在初始化后并准备
