@@ -49,6 +49,7 @@
     "rishiqing-deploy": "^2.0.9"
   },
   "dependencies": {
-    "electron-updater": "^4.2.0"
+    "electron-updater": "^4.2.0",
+    "getmac": "^5.0.0"
   }
 }

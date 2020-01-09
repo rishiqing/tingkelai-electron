@@ -52,6 +52,7 @@ function createWindow () {
     }, 
   })
   child.loadFile('./src/pages/about/versionMessage.html')
+  child.webContents.openDevTools()
 }
 
 // Electron 会在初始化后并准备
@@ -59,7 +60,7 @@ function createWindow () {
 // 部分 API 在 ready 事件触发后才能使用。
 app.on('ready', () => {
   createWindow()
-  // registerShortcut()
+  registerShortcut()
   autoUpdata()
   setContextmenu(win.webContents)
   isDomReady(win.webContents)
@@ -109,12 +110,19 @@ function setTheLock() {
 /** 在实例加载成功后，执行的脚本 */
 function behindInstanceJavaScript(contents) {
   contents.executeJavaScript(`
-    const os = require('os')
-    const networkInterfaces = os.networkInterfaces();
-    const list = networkInterfaces.WLAN
-    if (list && list.length > 0) window.mac = list[0].mac.replace(/:/g, '-')
-    // console.log(list[0].mac.replace(/:/g, '-'))
+    const getMac = require('getmac');
     window.isElectron = true
+    window.mac = getMac.default().replace(/:/g, '-');
+    console.log(getMac.default().replace(/:/g, '-').toLocaleUpperCase())
+
+    // console.log(getMac.default())
+    // const os = require('os')
+    // const networkInterfaces = os.networkInterfaces();
+    // console.log(networkInterfaces)
+    // const list = networkInterfaces.WLAN
+    // console.log(list)
+    // if (list && list.length > 0) window.mac = list[0].mac.replace(/:/g, '-')
+    // console.log(list[0].mac.replace(/:/g, '-'))
   `)
 }
 

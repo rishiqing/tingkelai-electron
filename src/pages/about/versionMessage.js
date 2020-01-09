@@ -3,18 +3,14 @@ window.onload = function () {
   const { Notification } = require('electron').remote;
   document.querySelector('.close').addEventListener('click', close);
   document.querySelector('.copy__click').addEventListener('click', copy);
-  let mac;
 
   /** 版本信息显示相关 */
-  const os = require('os');
   const package = require('../../../package.json');
-  const networkInterfaces = os.networkInterfaces();
-  const list = networkInterfaces.WLAN;
-  mac = list[0].mac.toLocaleUpperCase();
-
+  const getMac = require('getmac');
+  const macAddress = getMac.default().replace(/:/g, '-').toLocaleUpperCase()
   document.querySelector('.client__version').innerText = package.version;
   document.querySelector('.chrome__version').innerText = process.versions.chrome;
-  document.querySelector('.mac').innerText = mac.replace(/:/g, '-');
+  document.querySelector('.mac').innerText = macAddress;
   
   /** 关闭弹出框 */
   function close() {
@@ -33,7 +29,7 @@ window.onload = function () {
     textArea.style.left = 0;
     textArea.style.width = '1px';
     textArea.style.height = '1px';
-    textArea.value = mac.replace(/:/g, '-');
+    textArea.value = macAddress;
     document.body.appendChild(textArea);
     textArea.select();
     document.execCommand('copy');
