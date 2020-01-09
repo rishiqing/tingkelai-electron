@@ -1,6 +1,6 @@
 {
   "name": "tingkelai-electron",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "听客来PC客户端",
   "main": "main.js",
   "author": "南京听客来信息技术有限公司",
@@ -49,6 +49,7 @@
     "rishiqing-deploy": "^2.0.9"
   },
   "dependencies": {
-    "electron-updater": "^4.2.0"
+    "electron-updater": "^4.2.0",
+    "getmac": "^5.0.0"
   }
 }
