@@ -12,19 +12,20 @@ let child
 function createWindow () {
   // 创建浏览器窗口。
   win = new BrowserWindow({
-    width: 1460,
-    height: 1000,
     minWidth: 1300,
     minHeight: 800,
     icon: 'src/assets/favicon.icns',
     title: '听客来',
+    show: false, // 全屏时，需要先关闭
     webPreferences: {
       nodeIntegration: true // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
     },
   })
-  // new BuildMenu(win)
+  
   Menu.setApplicationMenu(setApplicationMenuTemplate())
   win.maximize()
+  win.show()
+  
 
   // 加载index.html文件
   // win.loadURL('https://www.tingkelai.com/tingkelai/')
