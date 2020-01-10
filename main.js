@@ -24,6 +24,7 @@ function createWindow () {
   })
   // new BuildMenu(win)
   Menu.setApplicationMenu(setApplicationMenuTemplate())
+  win.maximize()
 
   // 加载index.html文件
   // win.loadURL('https://www.tingkelai.com/tingkelai/')
@@ -61,11 +62,11 @@ function createWindow () {
 // 部分 API 在 ready 事件触发后才能使用。
 app.on('ready', () => {
   createWindow()
-  registerShortcut()
-  autoUpdata()
-  setContextmenu(win.webContents)
-  isDomReady(win.webContents)
-  setTheLock()
+  // registerShortcut() // 注册快捷键
+  autoUpdata() // 自动更新
+  setContextmenu(win.webContents) // 设置菜单
+  isDomReady(win.webContents) // 刷新后 dom 加载完成执行的事件
+  setTheLock() // 打开第二个客户端时
 })
 
 // 当全部窗口关闭时退出。
