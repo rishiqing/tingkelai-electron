@@ -112,10 +112,11 @@ function setTheLock() {
 function behindInstanceJavaScript(contents) {
   contents.executeJavaScript(`
     const getMac = require('getmac');
-    window.isElectron = true
+    window.isElectron = true; // 表示 electron 客户端
     window.mac = getMac.default().replace(/:/g, '-');
-    console.log(getMac.default().replace(/:/g, '-').toLocaleUpperCase())
 
+    // 使用 node 方法    
+    // console.log(getMac.default().replace(/:/g, '-').toLocaleUpperCase())
     // console.log(getMac.default())
     // const os = require('os')
     // const networkInterfaces = os.networkInterfaces();
