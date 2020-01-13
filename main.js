@@ -146,7 +146,7 @@ function registerShortcut() {
 
 /** 设置菜单栏 */
 function setApplicationMenuTemplate() {
-  const template = [
+  let template = [
     {
       label: '关于',
       click: () => {
@@ -154,6 +154,19 @@ function setApplicationMenuTemplate() {
       }
     },
   ]
+  
+  if (process.platform === 'darwin') {
+    template = [
+      { label: '听客来' },
+      {
+        label: '关于',
+        click: () => {
+          aboutDialog()
+        }
+      },
+    ]
+  }
+   
   return Menu.buildFromTemplate(template)
 }
 
