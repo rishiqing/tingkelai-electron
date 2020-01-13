@@ -154,18 +154,8 @@ function setApplicationMenuTemplate() {
       }
     },
   ]
-  
-  if (process.platform === 'darwin') {
-    template = [
-      { label: '听客来' },
-      {
-        label: '关于',
-        click: () => {
-          aboutDialog()
-        }
-      },
-    ]
-  }
+
+  if (process.platform === 'darwin') template.unshift({label: '听客来'})
    
   return Menu.buildFromTemplate(template)
 }
