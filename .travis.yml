@@ -1,13 +1,50 @@
 # matrix:
 #   include:
-    # - os: osx
-    #   osx_image: xcode10.2
-    #   language: node_js
-    #   node_js: "10"
+#     # - os: osx
+#     #   osx_image: xcode10.2
+#     #   language: node_js
+#     #   node_js: "10"
 
-os: windows
+#     - os: windows
+#       language: node_js
+#       node_js: "10"
+
+# env:
+#   global:
+#     # - GH_TOKEN=$GH_TOKEN 使用 阿里云上传，就不需要使用GH_TOKEN
+#     - ELECTRON_CACHE=$HOME/.cache/electron
+#     - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
+
+# cache:
+#   directories:
+#     - node_modules
+#     - $HOME/.cache/electron
+#     - $HOME/.cache/electron-builder
+
+# install:
+#   - npm i
+
+# script:
+#   # - echo GH_TOKEN
+#   # - npm run deploy
+#   - ./travis.sh
+
+# branches:
+#   only:
+#     - /^master-deploy-.*$/ # 正式版的发布
+#     - /^check-deploy-.*$/ # 用于审核的tag
+#     - /^beta-deploy-.*$/ # 本地测试
+
 language: node_js
 node_js: "10"
+
+jobs: 
+  include: 
+    - os: osx
+      osx_image: xcode10.2
+      script: ./travis-mac.sh
+    - os: windows
+      script: ./travis.sh
 
 env:
   global:
@@ -27,43 +64,10 @@ install:
 script:
   # - echo GH_TOKEN
   # - npm run deploy
-  - ./travis.sh
+  # - ./travis.sh
 
 branches:
   only:
     - /^master-deploy-.*$/ # 正式版的发布
     - /^check-deploy-.*$/ # 用于审核的tag
-    - /^beta-deploy-.*$/ # 本地测试
-
-
-os: osx
-osx_image: xcode10.2
-language: node_js
-node_js: "10"
-
-env:
-  global:
-    # - GH_TOKEN=$GH_TOKEN 使用 阿里云上传，就不需要使用GH_TOKEN
-    - ELECTRON_CACHE=$HOME/.cache/electron
-    - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
-cache:
-  directories:
-    - node_modules
-    - $HOME/.cache/electron
-    - $HOME/.cache/electron-builder
-
-install:
-  - npm i
-
-script:
-  # - echo GH_TOKEN
-  # - npm run deploy
-  - ./travis-mac.sh
-
-branches:
-  only:
-    - /^master-deploy-.*$/ # 正式版的发布
-    - /^check-deploy-.*$/ # 用于审核的tag
-    - /^beta-deploy-.*$/ # 本地测试
-
+    - /^beta-deploy-.*$/ # 本地测试 
