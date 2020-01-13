@@ -42,7 +42,9 @@ jobs:
   include: 
     - os: osx
       osx_image: xcode10.2
-      script: ./travis_mac.sh
+      script: 
+        - chmod 777 travis_mac.sh
+        - ./travis_mac.sh
     - os: windows
       script: ./travis_win.sh
 

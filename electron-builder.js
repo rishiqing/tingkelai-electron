@@ -27,7 +27,7 @@ builder.build({
     },
     mac: {
       category: 'public.app-category.productivity', //放到生产效率类
-      icon: 'res/app.icns',
+      icon: 'src/assets/tkl.ico',
       type: 'distribution'
     },
     dmg: {
