@@ -42,9 +42,9 @@ jobs:
   include: 
     - os: osx
       osx_image: xcode10.2
-      script: ./travis-mac.sh
+      script: ./travis_mac.sh
     - os: windows
-      script: ./travis.sh
+      script: ./travis_win.sh
 
 env:
   global:
