@@ -28,7 +28,8 @@ builder.build({
     mac: {
       category: 'public.app-category.productivity', //放到生产效率类
       icon: 'src/assets/tkl.ico',
-      type: 'distribution'
+      type: 'distribution',
+      target: ['dmg']
     },
     dmg: {
       artifactName: 'tingkelai-mac-${env.CHANNEL}-${version}.${ext}',
