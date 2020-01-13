@@ -59,7 +59,7 @@ install:
 script:
   # - echo GH_TOKEN
   # - npm run deploy
-  - ./travis.sh
+  - ./travis-mac.sh
 
 branches:
   only:
