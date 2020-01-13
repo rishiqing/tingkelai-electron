@@ -33,7 +33,7 @@ builder.build({
     },
     dmg: {
       artifactName: 'tingkelai-mac-${env.CHANNEL}-${version}.${ext}',
-      background: 'src/assets/dmf-bg.png',
+      background: 'src/assets/dmg-bg.png',
       title: 'tingkelai ${version}',
       contents: [
         {
