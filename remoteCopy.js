@@ -11,8 +11,10 @@ const path = require('path');
 
 const sourceList = [
   // { type: 'mac', key: 'pc-autoupdate/mac/check/release-mac.json' },
-  { type: 'ia32', key: 'pc-autoupdate/win/ia32/check/release.json' },
-  { type: 'x64', key: 'pc-autoupdate/win/x64/check/release.json' }
+  // { type: 'ia32', key: 'pc-autoupdate/win/ia32/check/release.json' },
+  // { type: 'x64', key: 'pc-autoupdate/win/x64/check/release.json' },
+  { type: 'ia32', key: 'pc-autoupdate/win/ia32/beta/beta.json' },
+  { type: 'x64', key: 'pc-autoupdate/win/x64/beta/beta.json' },
 ];
 
 const copySource = {
@@ -28,17 +30,24 @@ const copySource = {
   ia32: {
     prefix: 'pc-autoupdate/win/ia32',
     list: [
-      `tingkelai-win-ia32-release-${pkg.version}.exe`,
-      `release.json`,
-      `release.yml`,
+      // `tingkelai-win-ia32-release-${pkg.version}.exe`,
+      // `release.json`,
+      // `release.yml`,
+
+      `tingkelai-win-ia32-beta-${pkg.version}.exe`,
+      `beta.json`,
+      `beta.yml`,
     ]
   },
   x64: {
     prefix: 'pc-autoupdate/win/x64',
     list: [
-      `tingkelai-win-x64-release-${pkg.version}.exe`,
-      `release.json`,
-      `release.yml`,
+      // `tingkelai-win-x64-release-${pkg.version}.exe`,
+      // `release.json`,
+      // `release.yml`,
+      `tingkelai-win-x64-beta-${pkg.version}.exe`,
+      `beta.json`,
+      `beta.yml`,
     ]
   }
 };
@@ -107,7 +116,7 @@ const deal = async function () {
           const result = path.parse(file);
           const base = result.name + '_' + (new Date()).getTime() + result.ext
           await copyObject({
-            CopySource: path.join('/tingkelai-client', copyDetail.prefix, 'release', file).replace(/\\/g, '/'),
+            CopySource: path.join('/tingkelai-client', copyDetail.prefix, 'beta', file).replace(/\\/g, '/'),
             Key: path.join(copyDetail.prefix, 'test', base).replace(/\\/g, '/') // 这个地方不能以 '/' 开头，不然会报签名错误
           });
         }
@@ -118,7 +127,7 @@ const deal = async function () {
          *         tingkelai-mac-beta-1.0.1.dmg
          */
         await copyObject({
-          CopySource: path.join('/tingkelai-client', copyDetail.prefix, 'release', file).replace(/\\/g, '/'),
+          CopySource: path.join('/tingkelai-client', copyDetail.prefix, 'beta', file).replace(/\\/g, '/'),
           Key: path.join(copyDetail.prefix, 'test', file).replace(/\\/g, '/')
         });
       }
