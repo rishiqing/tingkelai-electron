@@ -43,6 +43,7 @@
   },
   "homepage": "https://github.com/rishiqing/tingkelai-electron#readme",
   "devDependencies": {
+    "aliyun-sdk": "^1.12.3",
     "cross-env": "^6.0.3",
     "electron": "^7.1.6",
     "electron-builder": "^21.2.0",
