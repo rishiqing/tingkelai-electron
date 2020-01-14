@@ -1,8 +1,6 @@
 
 const { app, BrowserWindow, globalShortcut, Menu, ipcMain, dialog, Notification, BrowserView } = require('electron')
 const { autoUpdater } = require("electron-updater")
-const path = require('path')
-var package = require("./package.json")
 
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
@@ -154,8 +152,22 @@ function setApplicationMenuTemplate() {
       }
     },
   ]
-
-  if (process.platform === 'darwin') template.unshift({label: '听客来'})
+  console.log(process.platform)
+  if (process.platform === 'darwin') {
+    template = [
+      {
+        label: '听客来',
+        submenu: [
+          {
+            label: '关于',
+            click: () => {
+              aboutDialog()
+            }
+          },
+        ]
+      }
+    ]
+  }
    
   return Menu.buildFromTemplate(template)
 }
