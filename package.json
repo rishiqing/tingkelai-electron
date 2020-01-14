@@ -1,6 +1,6 @@
 {
   "name": "tingkelai-electron",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "听客来PC客户端",
   "main": "main.js",
   "author": "南京听客来信息技术有限公司",
@@ -30,6 +30,7 @@
     "rdp-x64-beta": "rishiqing-deploy --env=x64-beta",
     "rdp-x64-check": "rishiqing-deploy --env=x64-check",
     "rdp-x64-release": "rishiqing-deploy --env=x64-release",
+    "rdp-release": "node remoteCopy.js",
     "deploy": "rishiqing-deploy --config='.rishiqing-deploy.yml'"
   },
   "repository": {

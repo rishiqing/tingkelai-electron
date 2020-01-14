@@ -99,7 +99,7 @@ const deal = async function () {
       if (!copyDetail) continue;
       for (let file of copyDetail.list) {
         /**
-         * copy 一份加时间戳的 .yml .json 的文件
+         * 根据已有的beta yml 文件去生成一份加时间戳的 .yml .json 的文件
          * 如： beta-mac_1578904042208.json
          *      beta-mac_1578904042208.yml
          */
