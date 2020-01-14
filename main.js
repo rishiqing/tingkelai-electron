@@ -61,9 +61,9 @@ app.on('ready', () => {
   createWindow()
   // registerShortcut() // 注册快捷键
   autoUpdata() // 自动更新
-  setContextmenu(win.webContents) // 设置菜单
+  setContextmenu(win.webContents) // 设置右击菜单
   isDomReady(win.webContents) // 刷新后 dom 加载完成执行的事件
-  setTheLock() // 打开第二个客户端时
+  setTheLock() // 获取设备锁，当打开第二个客户端时
 })
 
 // 当全部窗口关闭时退出。
