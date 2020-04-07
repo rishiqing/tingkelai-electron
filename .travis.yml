@@ -1,13 +1,16 @@
-matrix:
-  include:
-    # - os: osx
-    #   osx_image: xcode10.2
-    #   language: node_js
-    #   node_js: "10"
 
+language: node_js
+node_js: "10"
+
+jobs: 
+  include: 
+    - os: osx
+      osx_image: xcode10.2
+      script: 
+        - chmod 777 travis_mac.sh
+        - ./travis_mac.sh
     - os: windows
-      language: node_js
-      node_js: "10"
+      script: ./travis_win.sh
 
 env:
   global:
@@ -27,10 +30,10 @@ install:
 script:
   # - echo GH_TOKEN
   # - npm run deploy
-  - ./travis.sh
+  # - ./travis.sh
 
 branches:
   only:
     - /^master-deploy-.*$/ # 正式版的发布
     - /^check-deploy-.*$/ # 用于审核的tag
-    - /^beta-deploy-.*$/ # 本地测试
+    - /^beta-deploy-.*$/ # 本地测试 

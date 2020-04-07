@@ -1,8 +1,6 @@
 
 const { app, BrowserWindow, globalShortcut, Menu, ipcMain, dialog, Notification, BrowserView } = require('electron')
 const { autoUpdater } = require("electron-updater")
-const path = require('path')
-var package = require("./package.json")
 
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
@@ -63,9 +61,9 @@ app.on('ready', () => {
   createWindow()
   // registerShortcut() // 注册快捷键
   autoUpdata() // 自动更新
-  setContextmenu(win.webContents) // 设置菜单
+  setContextmenu(win.webContents) // 设置右击菜单
   isDomReady(win.webContents) // 刷新后 dom 加载完成执行的事件
-  setTheLock() // 打开第二个客户端时
+  setTheLock() // 获取设备锁，当打开第二个客户端时
 })
 
 // 当全部窗口关闭时退出。
@@ -146,7 +144,7 @@ function registerShortcut() {
 
 /** 设置菜单栏 */
 function setApplicationMenuTemplate() {
-  const template = [
+  let template = [
     {
       label: '关于',
       click: () => {
@@ -154,6 +152,58 @@ function setApplicationMenuTemplate() {
       }
     },
   ]
+  console.log(process.platform)
+  if (process.platform === 'darwin') {
+    template = [
+      {
+        label: '听客来',
+        submenu: [
+          {
+            label: '关于',
+            click: () => {
+              aboutDialog()
+            }
+          },
+        ]
+      },
+      {
+        label: '编辑',
+        submenu: [
+          {
+            label: '撤销',
+            accelerator: 'Command+Z',
+            role: 'undo'
+          },
+          {
+            label: '重做',
+            accelerator: 'Shift+Command+Z',
+            role: 'redo'
+          },
+          {
+            label: '剪切',
+            accelerator: 'Command+X',
+            role: 'cut'
+          },
+          {
+            label: '复制',
+            accelerator: 'Command+C',
+            role: 'copy'
+          },
+          {
+            label: '粘贴',
+            accelerator: 'Command+V',
+            role: 'paste'
+          },
+          {
+            label: '全选',
+            accelerator: 'Command+A',
+            role: 'selectall'
+          }
+        ]
+      }
+    ]
+  }
+   
   return Menu.buildFromTemplate(template)
 }
 
@@ -162,16 +212,17 @@ function setMenuTemplate() {
   const template = [
     {
       label: '复制',
+      accelerator: 'CommandOrControl+C',
       role: 'copy',
     },
-    { type: 'separator' },
     {
       label: '粘贴',
+      accelerator: 'CommandOrControl+V',
       role: 'paste',
     },
-    { type: 'separator' },
     {
       label: '刷新',
+      accelerator: 'CommandOrControl+R',
       role: 'reload',
     }
   ]
