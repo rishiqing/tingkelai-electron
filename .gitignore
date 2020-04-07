@@ -2,3 +2,4 @@ node_modules
 dist
 package*
 dev-app-update.yml
+package-lock.json
