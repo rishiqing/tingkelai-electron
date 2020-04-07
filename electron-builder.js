@@ -59,6 +59,8 @@ builder.build({
           arch: [process.env.ARCH]
         }
       ],
+      // certificateSubjectName: '南京听客来信息技术有限公司',
+      certificateSha1: 'C62F13BAC984C857370B22DB8550B58002180D81',
       icon: 'src/assets/tkl.ico',
       publish: {
         provider: 'generic',
@@ -78,7 +80,7 @@ builder.build({
       createStartMenuShortcut: true,
       allowToChangeInstallationDirectory: true,
       oneClick: false,
-      perMachine: false
+      perMachine: true // 与 oneClick 组合使用，出现不同的安装情况
     },
   }
 });
