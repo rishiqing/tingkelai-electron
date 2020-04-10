@@ -19,7 +19,7 @@ const copySource = {
   mac: {
     prefix: 'pc-autoupdate/mac',
     list: [
-      `tingkelai-${pkg.version}-mac.zip`,
+      // `tingkelai-${pkg.version}-mac.zip`,
       `tingkelai-mac-release-${pkg.version}.dmg`,
       `release-mac.json`,
       `release-mac.yml`,
