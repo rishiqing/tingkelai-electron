@@ -1,8 +1,6 @@
 
 const { app, BrowserWindow, globalShortcut, Menu, ipcMain, dialog, Notification, BrowserView } = require('electron')
 const { autoUpdater } = require("electron-updater")
-const path = require('path')
-var package = require("./package.json")
 
 // 保持对window对象的全局引用，如果不这么做的话，当JavaScript对象被
 // 垃圾回收的时候，window对象将会自动的关闭
@@ -12,23 +10,23 @@ let child
 function createWindow () {
   // 创建浏览器窗口。
   win = new BrowserWindow({
-    width: 1460,
-    height: 1000,
     minWidth: 1300,
     minHeight: 800,
-    icon: 'assets/favicon.icns',
+    icon: 'src/assets/favicon.icns',
+    title: '听客来',
+    show: false, // 全屏时，需要先关闭
     webPreferences: {
       nodeIntegration: true // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
     },
   })
-  // new BuildMenu(win)
+  
   Menu.setApplicationMenu(setApplicationMenuTemplate())
+  win.maximize()
+  win.show()
+  
 
   // 加载index.html文件
   win.loadURL('https://www.tingkelai.com/tingkelai/')
-  // win.loadURL('https://www.baidu.com')
-  // win.loadURL('https://test.tingkelai.com/tingkelai/login')
-  // win.loadURL('http://127.0.0.1:90/tingkelai/login')
 
   // 当 window 被关闭，这个事件会被触发。
   win.on('closed', () => {
@@ -52,7 +50,8 @@ function createWindow () {
       nodeIntegration: true // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
     }, 
   })
-  child.loadFile('./dialog/versionMessage.html')
+  child.loadFile('./src/pages/about/versionMessage.html')
+  // child.webContents.openDevTools() // 打开调试控制台
 }
 
 // Electron 会在初始化后并准备
@@ -60,11 +59,11 @@ function createWindow () {
 // 部分 API 在 ready 事件触发后才能使用。
 app.on('ready', () => {
   createWindow()
-  registerShortcut()
-  // autoUpdata()
-  setContextmenu(win.webContents)
-  isDomReady(win.webContents)
-  // setTheLock()
+  // registerShortcut() // 注册快捷键
+  autoUpdata() // 自动更新
+  setContextmenu(win.webContents) // 设置右击菜单
+  isDomReady(win.webContents) // 刷新后 dom 加载完成执行的事件
+  setTheLock() // 获取设备锁，当打开第二个客户端时
 })
 
 // 当全部窗口关闭时退出。
@@ -110,13 +109,20 @@ function setTheLock() {
 /** 在实例加载成功后，执行的脚本 */
 function behindInstanceJavaScript(contents) {
   contents.executeJavaScript(`
-    // console.log(document.querySelector('#app'))
-    // console.log(process)
-    const os = require('os')
-    const networkInterfaces = os.networkInterfaces();
-    const list = networkInterfaces.WLAN
-    // console.log(list[0].mac)
-    if (list && list.length > 0) window.mac = list[0].mac
+    const getMac = require('getmac');
+    window.isElectron = true; // 表示 electron 客户端
+    window.mac = getMac.default().replace(/:/g, '-');
+
+    // 使用 node 方法    
+    // console.log(getMac.default().replace(/:/g, '-').toLocaleUpperCase())
+    // console.log(getMac.default())
+    // const os = require('os')
+    // const networkInterfaces = os.networkInterfaces();
+    // console.log(networkInterfaces)
+    // const list = networkInterfaces.WLAN
+    // console.log(list)
+    // if (list && list.length > 0) window.mac = list[0].mac.replace(/:/g, '-')
+    // console.log(list[0].mac.replace(/:/g, '-'))
   `)
 }
 
@@ -138,7 +144,7 @@ function registerShortcut() {
 
 /** 设置菜单栏 */
 function setApplicationMenuTemplate() {
-  const template = [
+  let template = [
     {
       label: '关于',
       click: () => {
@@ -146,6 +152,58 @@ function setApplicationMenuTemplate() {
       }
     },
   ]
+  console.log(process.platform)
+  if (process.platform === 'darwin') {
+    template = [
+      {
+        label: '听客来',
+        submenu: [
+          {
+            label: '关于',
+            click: () => {
+              aboutDialog()
+            }
+          },
+        ]
+      },
+      {
+        label: '编辑',
+        submenu: [
+          {
+            label: '撤销',
+            accelerator: 'Command+Z',
+            role: 'undo'
+          },
+          {
+            label: '重做',
+            accelerator: 'Shift+Command+Z',
+            role: 'redo'
+          },
+          {
+            label: '剪切',
+            accelerator: 'Command+X',
+            role: 'cut'
+          },
+          {
+            label: '复制',
+            accelerator: 'Command+C',
+            role: 'copy'
+          },
+          {
+            label: '粘贴',
+            accelerator: 'Command+V',
+            role: 'paste'
+          },
+          {
+            label: '全选',
+            accelerator: 'Command+A',
+            role: 'selectall'
+          }
+        ]
+      }
+    ]
+  }
+   
   return Menu.buildFromTemplate(template)
 }
 
@@ -154,16 +212,17 @@ function setMenuTemplate() {
   const template = [
     {
       label: '复制',
+      accelerator: 'CommandOrControl+C',
       role: 'copy',
     },
-    { type: 'separator' },
     {
       label: '粘贴',
+      accelerator: 'CommandOrControl+V',
       role: 'paste',
     },
-    { type: 'separator' },
     {
       label: '刷新',
+      accelerator: 'CommandOrControl+R',
       role: 'reload',
     }
   ]
@@ -189,26 +248,15 @@ function isDomReady(contents) {
 
 /** 显示更新弹框 */
 function autoUpdata() {
-  // autoUpdater.getFeedURL('http://127.0.0.1:8080')
-  // autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml')
-  
-  // test
   autoUpdater.checkForUpdates()
   // autoUpdater.on('update-downloaded', function (info) {
   //   const notify = new Notification({
-  //     title: `日事清V${info.version} 已准备就绪！`,
+  //     title: `听客来V${info.version} 已准备就绪！`,
   //     body: `请退出当前应用，以便完成更新！`
   //   });
   //   notify.show();
   // });
-  // autoUpdater.on('error', function (error) {
-  //   console.log(error, '-')
-  //   const notify = new Notification({
-  //     title: '日事清PC端自动更新出错了!!!',
-  //     body: error.message
-  //   });
-  //   notify.show();
-  // });
+
 
   // autoUpdater.on('update-available', () => {
   //   const notify = new Notification({
@@ -216,37 +264,6 @@ function autoUpdata() {
   //     body: `有更新`
   //   });
   //   notify.show();
-  // })
-  // autoUpdater.on('update-not-available', () => {
-  //   const notify = new Notification({
-  //     title: `没有更新`,
-  //     body: `没有更新`
-  //   });
-  //   notify.show();
-  // })
-  
-  // autoUpdater.on('download-progress', () => {
-  //   const notify = new Notification({
-  //     title: `更新中...`,
-  //     body: `更新中...`
-  //   });
-  //   notify.show();
-  // })
-
-  // autoUpdater.on('update-downloaded', () => {
-  //   dialog.showMessageBox(win, {
-  //     type: 'info',
-  //     title: '更新完成',
-  //     message: '恭喜更新完成！',
-  //     buttons: ['关闭', '确定'],
-  //   }).then((res) => {
-  //     console.log(res)
-  //     if (res.response === 1) {
-  //       autoUpdater.quitAndInstall()
-  //     } else {
-  //       app.quit()
-  //     }
-  //   })
   // })
 }
 

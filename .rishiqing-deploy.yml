@@ -266,131 +266,131 @@ x64-release:
             endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
             prefix: 'pc-autoupdate/win/x64/release'
 
-# mac-beta:
-#   build:
-#     - 'npm run build-mac-beta'
-#   convert:
-#     target: package-beta/beta-mac.yml
-#     dest: package-beta/beta-mac.json
-#   resource:
-#     - dist: 'package-beta' # 资源所在目录 或者 文件路径
-#       ignore:
-#         - 'mac'
-#         - '/.yml$/'
-#         - '/.json/'
-#         - '/.blockmap$/'
-#       upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
-#         - type: 'aliyunOss'
-#           param:
-#             accessKeyId: ${ALY_OSS_Access_Id}
-#             secretAccessKey: ${ALY_OSS_Access_Key}
-#             bucket: 'tingkelai-client'
-#             endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
-#             prefix: 'pc-autoupdate/mac/beta'
-#   fileReplace:
-#     - dist: 'package-beta/beta-mac.yml' # 资源所在目录 或者 文件路径
-#       target: 'beta-mac.yml'
-#       upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
-#         - type: 'aliyunOss'
-#           param:
-#             accessKeyId: ${ALY_OSS_Access_Id}
-#             secretAccessKey: ${ALY_OSS_Access_Key}
-#             bucket: 'tingkelai-client'
-#             endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
-#             prefix: 'pc-autoupdate/mac/beta'
-#     - dist: 'package-beta/beta-mac.json' # 资源所在目录 或者 文件路径
-#       target: 'beta-mac.json'
-#       upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
-#         - type: 'aliyunOss'
-#           param:
-#             accessKeyId: ${ALY_OSS_Access_Id}
-#             secretAccessKey: ${ALY_OSS_Access_Key}
-#             bucket: 'tingkelai-client'
-#             endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
-#             prefix: 'pc-autoupdate/mac/beta'
+mac-beta:
+  build:
+    - 'npm run build-mac-beta'
+  convert:
+    target: package-beta/beta-mac.yml
+    dest: package-beta/beta-mac.json
+  resource:
+    - dist: 'package-beta' # 资源所在目录 或者 文件路径
+      ignore:
+        - 'mac'
+        - '/.yml$/'
+        - '/.json/'
+        - '/.blockmap$/'
+      upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
+        - type: 'aliyunOss'
+          param:
+            accessKeyId: ${ALY_OSS_Access_Id}
+            secretAccessKey: ${ALY_OSS_Access_Key}
+            bucket: 'tingkelai-client'
+            endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
+            prefix: 'pc-autoupdate/mac/beta'
+  fileReplace:
+    - dist: 'package-beta/beta-mac.yml' # 资源所在目录 或者 文件路径
+      target: 'beta-mac.yml'
+      upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
+        - type: 'aliyunOss'
+          param:
+            accessKeyId: ${ALY_OSS_Access_Id}
+            secretAccessKey: ${ALY_OSS_Access_Key}
+            bucket: 'tingkelai-client'
+            endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
+            prefix: 'pc-autoupdate/mac/beta'
+    - dist: 'package-beta/beta-mac.json' # 资源所在目录 或者 文件路径
+      target: 'beta-mac.json'
+      upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
+        - type: 'aliyunOss'
+          param:
+            accessKeyId: ${ALY_OSS_Access_Id}
+            secretAccessKey: ${ALY_OSS_Access_Key}
+            bucket: 'tingkelai-client'
+            endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
+            prefix: 'pc-autoupdate/mac/beta'
 
-# mac-check:
-#   build:
-#     - 'npm run build-mac-release'
-#   convert:
-#     target: package-release/release-mac.yml
-#     dest: package-release/release-mac.json
-#   resource:
-#     - dist: 'package-release' # 资源所在目录 或者 文件路径
-#       ignore:
-#         - 'mac'
-#         - '/.yml$/'
-#         - '/.json/'
-#         - '/.blockmap$/'
-#       upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
-#         - type: 'aliyunOss'
-#           param:
-#             accessKeyId: ${ALY_OSS_Access_Id}
-#             secretAccessKey: ${ALY_OSS_Access_Key}
-#             bucket: 'tingkelai-client'
-#             endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
-#             prefix: 'pc-autoupdate/mac/check'
-#   fileReplace:
-#     - dist: 'package-release/release-mac.yml' # 资源所在目录 或者 文件路径
-#       target: 'release-mac.yml'
-#       upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
-#         - type: 'aliyunOss'
-#           param:
-#             accessKeyId: ${ALY_OSS_Access_Id}
-#             secretAccessKey: ${ALY_OSS_Access_Key}
-#             bucket: 'tingkelai-client'
-#             endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
-#             prefix: 'pc-autoupdate/mac/check'
-#     - dist: 'package-release/release-mac.json'
-#       target: 'release-mac.json'
-#       upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
-#         - type: 'aliyunOss'
-#           param:
-#             accessKeyId: ${ALY_OSS_Access_Id}
-#             secretAccessKey: ${ALY_OSS_Access_Key}
-#             bucket: 'tingkelai-client'
-#             endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
-#             prefix: 'pc-autoupdate/mac/check'
+mac-check:
+  build:
+    - 'npm run build-mac-release'
+  convert:
+    target: package-release/release-mac.yml
+    dest: package-release/release-mac.json
+  resource:
+    - dist: 'package-release' # 资源所在目录 或者 文件路径
+      ignore:
+        - 'mac'
+        - '/.yml$/'
+        - '/.json/'
+        - '/.blockmap$/'
+      upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
+        - type: 'aliyunOss'
+          param:
+            accessKeyId: ${ALY_OSS_Access_Id}
+            secretAccessKey: ${ALY_OSS_Access_Key}
+            bucket: 'tingkelai-client'
+            endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
+            prefix: 'pc-autoupdate/mac/check'
+  fileReplace:
+    - dist: 'package-release/release-mac.yml' # 资源所在目录 或者 文件路径
+      target: 'release-mac.yml'
+      upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
+        - type: 'aliyunOss'
+          param:
+            accessKeyId: ${ALY_OSS_Access_Id}
+            secretAccessKey: ${ALY_OSS_Access_Key}
+            bucket: 'tingkelai-client'
+            endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
+            prefix: 'pc-autoupdate/mac/check'
+    - dist: 'package-release/release-mac.json'
+      target: 'release-mac.json'
+      upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
+        - type: 'aliyunOss'
+          param:
+            accessKeyId: ${ALY_OSS_Access_Id}
+            secretAccessKey: ${ALY_OSS_Access_Key}
+            bucket: 'tingkelai-client'
+            endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
+            prefix: 'pc-autoupdate/mac/check'
 
-# mac-release:
-#   build:
-#     - 'npm run build-mac-release'
-#   convert:
-#     target: package-release/release-mac.yml
-#     dest: package-release/release-mac.json
-#   resource:
-#     - dist: 'package-release' # 资源所在目录 或者 文件路径
-#       ignore:
-#         - 'mac'
-#         - '/.yml$/'
-#         - '/.json/'
-#         - '/.blockmap$/'
-#       upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
-#         - type: 'aliyunOss'
-#           param:
-#             accessKeyId: ${ALY_OSS_Access_Id}
-#             secretAccessKey: ${ALY_OSS_Access_Key}
-#             bucket: 'tingkelai-client'
-#             endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
-#             prefix: 'pc-autoupdate/mac/release'
-#   fileReplace:
-#     - dist: 'package-release/release-mac.yml' # 资源所在目录 或者 文件路径
-#       target: 'release-mac.yml'
-#       upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
-#         - type: 'aliyunOss'
-#           param:
-#             accessKeyId: ${ALY_OSS_Access_Id}
-#             secretAccessKey: ${ALY_OSS_Access_Key}
-#             bucket: 'tingkelai-client'
-#             endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
-#             prefix: 'pc-autoupdate/mac/release'
-#     - dist: 'package-release/release-mac.json'
-#       target: 'release-mac.json'
-#       upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
-#         - type: 'aliyunOss'
-#           param:
-#             accessKeyId: ${ALY_OSS_Access_Id}
-#             secretAccessKey: ${ALY_OSS_Access_Key}
-#             bucket: 'tingkelai-client'
-#             endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
-#             prefix: 'pc-autoupdate/mac/release'
+mac-release:
+  build:
+    - 'npm run build-mac-release'
+  convert:
+    target: package-release/release-mac.yml
+    dest: package-release/release-mac.json
+  resource:
+    - dist: 'package-release' # 资源所在目录 或者 文件路径
+      ignore:
+        - 'mac'
+        - '/.yml$/'
+        - '/.json/'
+        - '/.blockmap$/'
+      upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
+        - type: 'aliyunOss'
+          param:
+            accessKeyId: ${ALY_OSS_Access_Id}
+            secretAccessKey: ${ALY_OSS_Access_Key}
+            bucket: 'tingkelai-client'
+            endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
+            prefix: 'pc-autoupdate/mac/release'
+  fileReplace:
+    - dist: 'package-release/release-mac.yml' # 资源所在目录 或者 文件路径
+      target: 'release-mac.yml'
+      upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
+        - type: 'aliyunOss'
+          param:
+            accessKeyId: ${ALY_OSS_Access_Id}
+            secretAccessKey: ${ALY_OSS_Access_Key}
+            bucket: 'tingkelai-client'
+            endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
+            prefix: 'pc-autoupdate/mac/release'
+    - dist: 'package-release/release-mac.json'
+      target: 'release-mac.json'
+      upload: # 以下指定上传资源文件要用的方式，如果指定多个，会依次使用上传
+        - type: 'aliyunOss'
+          param:
+            accessKeyId: ${ALY_OSS_Access_Id}
+            secretAccessKey: ${ALY_OSS_Access_Key}
+            bucket: 'tingkelai-client'
+            endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
+            prefix: 'pc-autoupdate/mac/release'
