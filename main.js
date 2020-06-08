@@ -59,7 +59,7 @@ function createWindow () {
 // 部分 API 在 ready 事件触发后才能使用。
 app.on('ready', () => {
   createWindow()
-  // registerShortcut() // 注册快捷键
+  registerShortcut() // 注册快捷键
   autoUpdata() // 自动更新
   setContextmenu(win.webContents) // 设置右击菜单
   isDomReady(win.webContents) // 刷新后 dom 加载完成执行的事件
@@ -128,12 +128,12 @@ function behindInstanceJavaScript(contents) {
 
 /** 注册快捷键 */
 function registerShortcut() {
-  globalShortcut.register('CommandOrControl+I', () => {
+  globalShortcut.register('CommandOrControl+P', () => {
     // 打开开发者工具
     win.webContents.openDevTools()
   })
 
-  if (!globalShortcut.isRegistered('CommandOrControl+I')) {
+  if (!globalShortcut.isRegistered('CommandOrControl+P')) {
     globalShortcut.register('CommandOrControl+P', () => {
       // 打开开发者工具
       win.webContents.openDevTools()
