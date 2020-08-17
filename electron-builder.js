@@ -33,7 +33,8 @@ builder.build({
       target: ['dmg']
     },
     dmg: {
-      artifactName: 'tingkelai-mac-${env.CHANNEL}-${version}.${ext}',
+      // 立聪堂定制版安装文件有listentown后缀名
+      artifactName: 'tingkelai-mac-${env.CHANNEL}-${version}-listentown.${ext}',
       background: 'src/assets/dmg-bg.png',
       title: 'tingkelai ${version}',
       contents: [
