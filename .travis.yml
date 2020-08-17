@@ -37,3 +37,4 @@ branches:
     - /^master-deploy-.*$/ # 正式版的发布
     - /^check-deploy-.*$/ # 用于审核的tag
     - /^beta-deploy-.*$/ # 本地测试 
+    - /^listentown-deploy-.*$/ # 立聪堂定制版

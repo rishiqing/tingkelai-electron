@@ -12,16 +12,24 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "electron .",
+    "rdp-release": "node remoteCopy.js",
+    
     "rdp-ia32-beta": "rishiqing-deploy --env=ia32-beta",
     "rdp-ia32-check": "rishiqing-deploy --env=ia32-check",
     "rdp-ia32-release": "rishiqing-deploy --env=ia32-release",
+    "rdp-ia32-listentown": "rishiqing-deploy --env=ia32-listentown",
+
     "rdp-x64-beta": "rishiqing-deploy --env=x64-beta",
     "rdp-x64-check": "rishiqing-deploy --env=x64-check",
     "rdp-x64-release": "rishiqing-deploy --env=x64-release",
+    "rdp-x64-listentown": "rishiqing-deploy --env=x64-listentown",
+
     "rdp-mac-beta": "rishiqing-deploy --env=mac-beta",
     "rdp-mac-check": "rishiqing-deploy --env=mac-check",
     "rdp-mac-release": "rishiqing-deploy --env=mac-release",
-    "rdp-release": "node remoteCopy.js",
+    "rdp-mac-listentown": "rishiqing-deploy --env=mac-listentown",
+  
+
     "build-ia32-beta": "cross-env CHANNEL=beta ARCH=ia32 node electron-builder.js",
     "build-ia32-release": "cross-env CHANNEL=release ARCH=ia32 node electron-builder.js",
     "build-x64-beta": "cross-env CHANNEL=beta ARCH=x64 node electron-builder.js",
