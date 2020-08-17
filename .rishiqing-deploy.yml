@@ -525,4 +525,3 @@ mac-listentown:
             bucket: 'tingkelai-client'
             endpoint: 'http://oss-cn-hangzhou.aliyuncs.com'
             prefix: 'pc-autoupdate/mac/listentown'
-
