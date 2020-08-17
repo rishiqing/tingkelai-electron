@@ -1,1 +1,1 @@
-立聪堂版本从listentown分支发布，打上listentown-deploy-v.x.x.x后发布到到OSS上各个平台listentown文件夹下。
+立聪堂版本从listentown分支发布，打上listentown-deploy-v1.x.x后发布到到OSS上各个平台listentown文件夹下。
