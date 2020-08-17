@@ -6,7 +6,8 @@ const output = process.platform === 'darwin' ? `package-${process.env.CHANNEL}` 
 builder.build({
   config: {
     appId: 'release.tingkelai.electron',
-    productName: 'tingkelai',
+    // 立聪堂定制exe名称
+    productName: 'tingkelai-for-listentown',
     electronVersion: pkg.electronVersion,
     directories: {
       output: output,
@@ -69,7 +70,8 @@ builder.build({
       }
     },
     nsis: {
-      artifactName: 'tingkelai-win-${env.ARCH}-${env.CHANNEL}-${version}.exe',
+      // 立聪堂定制版安装文件有listentown后缀名
+      artifactName: 'tingkelai-win-${env.ARCH}-${env.CHANNEL}-${version}-listentown.exe',
       shortcutName: '听客来',
       uninstallDisplayName: '听客来 ${version}',
       guid: 'BE407C3D-E86D-7273-36F9-69C6E8F9F216',
