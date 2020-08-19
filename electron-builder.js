@@ -23,8 +23,8 @@ builder.build({
     ],
     publish: {
       provider: 'generic',
-      url: 'https://download.tingkelai.com/pc-autoupdate/${os}/${env.CHANNEL}',
-      channel: '${env.CHANNEL}'
+      url: 'https://download.tingkelai.com/pc-autoupdate/${os}/listentown',
+      channel: 'listentown'
     },
     mac: {
       category: 'public.app-category.productivity', //放到生产效率类
@@ -66,8 +66,8 @@ builder.build({
       icon: 'src/assets/tkl.ico',
       publish: {
         provider: 'generic',
-        url: 'https://download.tingkelai.com/pc-autoupdate/${os}/${env.ARCH}/${env.CHANNEL}',
-        channel: '${env.CHANNEL}'
+        url: 'https://download.tingkelai.com/pc-autoupdate/${os}/${env.ARCH}/listentown',
+        channel: 'listentown'
       }
     },
     nsis: {
