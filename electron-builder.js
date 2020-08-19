@@ -24,7 +24,7 @@ builder.build({
     publish: {
       provider: 'generic',
       url: 'https://download.tingkelai.com/pc-autoupdate/${os}/listentown',
-      channel: 'listentown'
+      channel: '${env.CHANNEL}'
     },
     mac: {
       category: 'public.app-category.productivity', //放到生产效率类
@@ -67,7 +67,7 @@ builder.build({
       publish: {
         provider: 'generic',
         url: 'https://download.tingkelai.com/pc-autoupdate/${os}/${env.ARCH}/listentown',
-        channel: 'listentown'
+        channel: '${env.CHANNEL}'
       }
     },
     nsis: {
