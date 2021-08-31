@@ -16,7 +16,8 @@ function createWindow () {
     title: '听客来',
     show: false, // 全屏时，需要先关闭
     webPreferences: {
-      nodeIntegration: true // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
+      nodeIntegration: true, // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
+      contextIsolation: false
     },
   })
   
@@ -47,7 +48,8 @@ function createWindow () {
     minHeight: 330,
     resizable: false,
     webPreferences: {
-      nodeIntegration: true // 是否集成Node：默认不开启。不开启的话，node有关系的代码无法识别。
+      nodeIntegration: true,
+      contextIsolation: false
     }, 
   })
   child.loadFile('./src/pages/about/versionMessage.html')
@@ -111,7 +113,9 @@ function behindInstanceJavaScript(contents) {
   contents.executeJavaScript(`
     const getMac = require('getmac');
     window.isElectron = true; // 表示 electron 客户端
-    window.mac = getMac.default().replace(/:/g, '-');
+    let theMac = getMac.default().replace(/:/g, '-');
+    console.log('theMac', theMac)
+    window.mac = theMac
 
     // 使用 node 方法    
     // console.log(getMac.default().replace(/:/g, '-').toLocaleUpperCase())
@@ -151,6 +155,12 @@ function setApplicationMenuTemplate() {
         aboutDialog()
       }
     },
+    {
+      label: '控制台',
+      click: () => {
+        win.webContents.openDevTools()
+      }
+    },
   ]
   console.log(process.platform)
   if (process.platform === 'darwin') {
@@ -162,6 +172,12 @@ function setApplicationMenuTemplate() {
             label: '关于',
             click: () => {
               aboutDialog()
+            }
+          },
+          {
+            label: '控制台',
+            click: () => {
+              win.webContents.openDevTools()
             }
           },
         ]
