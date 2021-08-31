@@ -46,12 +46,12 @@
   "devDependencies": {
     "aliyun-sdk": "^1.12.3",
     "cross-env": "^6.0.3",
-    "electron": "^7.1.6",
-    "electron-builder": "^21.2.0",
+    "electron": "^14.0.0",
+    "electron-builder": "^22.11.7",
     "rishiqing-deploy": "^2.0.9"
   },
   "dependencies": {
-    "electron-updater": "^4.2.0",
+    "electron-updater": "^4.3.9",
     "getmac": "^5.0.0"
   }
 }
