@@ -1,6 +1,6 @@
 window.onload = function () {
   const { ipcRenderer } = require('electron');
-  const { Notification } = require('electron').remote;
+  // const { Notification } = require('electron').remote;
   document.querySelector('.close').addEventListener('click', close);
   document.querySelector('.copy__click').addEventListener('click', copy);
 
