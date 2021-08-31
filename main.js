@@ -151,6 +151,12 @@ function setApplicationMenuTemplate() {
         aboutDialog()
       }
     },
+    {
+      label: '控制台',
+      click: () => {
+        win.webContents.openDevTools()
+      }
+    },
   ]
   console.log(process.platform)
   if (process.platform === 'darwin') {
@@ -162,6 +168,12 @@ function setApplicationMenuTemplate() {
             label: '关于',
             click: () => {
               aboutDialog()
+            }
+          },
+          {
+            label: '控制台',
+            click: () => {
+              win.webContents.openDevTools()
             }
           },
         ]
