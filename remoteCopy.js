@@ -126,6 +126,7 @@ const deal = async function () {
   }
 }
 
+console.log('remoteCopy: ', 'start remote copy...')
 deal()
   .catch((error) => {
     console.error(error)
