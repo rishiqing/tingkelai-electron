@@ -93,6 +93,8 @@ const deal = async function () {
     } catch (e) {}
   }
 
+  console.log('remoteCopy: infoList\n', JSON.stringify(infoList, null, 2))
+
   for (let item of infoList) {
     if (item && item.data && item.data.version === pkg.version) {
       const copyDetail = copySource[item.type];
