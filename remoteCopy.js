@@ -93,11 +93,15 @@ const deal = async function () {
     } catch (e) {}
   }
 
+  console.log('remoteCopy: infoList\n', JSON.stringify(infoList, null, 2))
+
   for (let item of infoList) {
     if (item && item.data && item.data.version === pkg.version) {
       const copyDetail = copySource[item.type];
       if (!copyDetail) continue;
       for (let file of copyDetail.list) {
+        const sourcePath = path.join('/tingkelai-client', copyDetail.prefix, 'check', file).replace(/\\/g, '/')
+        console.log('remoteCopy: start copy file ', sourcePath)
         /**
          * 根据已有的beta yml 文件去生成一份加时间戳的 .yml .json 的文件
          * 如： beta-mac_1578904042208.json
@@ -106,10 +110,15 @@ const deal = async function () {
         if (/\.json|\.yml$/.test(file)) {
           const result = path.parse(file);
           const base = result.name + '_' + (new Date()).getTime() + result.ext
+          const renameSourcePath = path.join('/tingkelai-client', copyDetail.prefix, 'release', file).replace(/\\/g, '/')
+          const timeStampPath = path.join(copyDetail.prefix, 'release', base).replace(/\\/g, '/') // 这个地方不能以 '/' 开头，不然会报签名错误
+          console.log(`remoteCopy: cache file ${renameSourcePath} to ${timeStampPath}`)
           await copyObject({
-            CopySource: path.join('/tingkelai-client', copyDetail.prefix, 'check', file).replace(/\\/g, '/'),
-            Key: path.join(copyDetail.prefix, 'release', base).replace(/\\/g, '/') // 这个地方不能以 '/' 开头，不然会报签名错误
+            CopySource: renameSourcePath,
+            Key: timeStampPath
           });
+
+          console.log(`remoteCopy: success cache file ${renameSourcePath} to ${timeStampPath}`)
         }
         /**
          * copy 的文件 包括但不限于：
@@ -118,12 +127,19 @@ const deal = async function () {
          *         tingkelai-mac-beta-1.0.1.dmg
          */
         await copyObject({
-          CopySource: path.join('/tingkelai-client', copyDetail.prefix, 'check', file).replace(/\\/g, '/'),
+          CopySource: sourcePath,
           Key: path.join(copyDetail.prefix, 'release', file).replace(/\\/g, '/')
         });
+
+        console.log('remoteCopy: copy success ', sourcePath)
       }
     }
   }
 }
 
-deal();
+console.log('remoteCopy: ', 'start remote copy...')
+deal()
+  .catch((error) => {
+    console.error(error)
+    process.exit(1)
+  })
