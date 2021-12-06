@@ -126,4 +126,8 @@ const deal = async function () {
   }
 }
 
-deal();
+deal()
+  .catch((error) => {
+    console.error(error)
+    process.exit(1)
+  })
