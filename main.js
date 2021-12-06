@@ -27,7 +27,7 @@ function createWindow () {
   
 
   // 加载index.html文件
-  win.loadURL('https://www.tingkelai.com/tingkelai/')
+  win.loadURL('https://beta.tingkelai.com/tingkelai/login')
 
   // 当 window 被关闭，这个事件会被触发。
   win.on('closed', () => {
@@ -121,6 +121,13 @@ function behindInstanceJavaScript(contents) {
     let theMac = getMac.default().replace(/:/g, '-');
     console.log('theMac', theMac)
     window.mac = theMac
+
+    // 捕获外部链接
+    const {shell} = require('electron');
+    // 这个事件名称很重要
+    window.addEventListener('externalLink', function (e) {
+      shell.openExternal(e.detail.href)
+    })
 
     // 使用 node 方法    
     // console.log(getMac.default().replace(/:/g, '-').toLocaleUpperCase())
