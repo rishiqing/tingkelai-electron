@@ -25,9 +25,8 @@ function createWindow () {
   win.maximize()
   win.show()
   
-
   // 加载index.html文件
-  win.loadURL('https://beta.tingkelai.com/tingkelai/login')
+  win.loadURL('https://www.tingkelai.com/tingkelai/')
 
   // 当 window 被关闭，这个事件会被触发。
   win.on('closed', () => {
