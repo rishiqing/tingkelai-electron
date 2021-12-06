@@ -25,7 +25,6 @@ function createWindow () {
   win.maximize()
   win.show()
   
-
   // 加载index.html文件
   win.loadURL('https://www.tingkelai.com/tingkelai/')
 
