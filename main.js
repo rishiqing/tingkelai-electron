@@ -60,9 +60,10 @@ function createWindow () {
 // 创建浏览器窗口时，调用这个函数。
 // 部分 API 在 ready 事件触发后才能使用。
 app.on('ready', () => {
+  console.log('ready')
   createWindow()
   registerShortcut() // 注册快捷键
-  autoUpdata() // 自动更新
+  autoUpdate() // 自动更新
   setContextmenu(win.webContents) // 设置右击菜单
   isDomReady(win.webContents) // 刷新后 dom 加载完成执行的事件
   setTheLock() // 获取设备锁，当打开第二个客户端时
@@ -81,10 +82,14 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
+  console.log('activate')
   // 在macOS上，当单击dock图标并且没有其他窗口打开时，
   // 通常在应用程序中重新创建一个窗口。
   if (win === null) {
     createWindow()
+    registerShortcut() // 注册快捷键
+    setContextmenu(win.webContents) // 设置右击菜单
+    isDomReady(win.webContents) // 刷新后 dom 加载完成执行的事件
   }
 })
 
@@ -116,6 +121,13 @@ function behindInstanceJavaScript(contents) {
     let theMac = getMac.default().replace(/:/g, '-');
     console.log('theMac', theMac)
     window.mac = theMac
+
+    // 捕获外部链接
+    const {shell} = require('electron');
+    // 这个事件名称很重要
+    window.addEventListener('externalLink', function (e) {
+      shell.openExternal(e.detail.href)
+    })
 
     // 使用 node 方法    
     // console.log(getMac.default().replace(/:/g, '-').toLocaleUpperCase())
@@ -263,7 +275,7 @@ function isDomReady(contents) {
 }
 
 /** 显示更新弹框 */
-function autoUpdata() {
+function autoUpdate() {
   autoUpdater.checkForUpdates()
   // autoUpdater.on('update-downloaded', function (info) {
   //   const notify = new Notification({
